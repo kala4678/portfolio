@@ -3,15 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kala Nguyen: Personal site and portfolio</title>
+    <title>Contact</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-    <h1>Kala Nguyen</h1>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../projects/">Projects</a>
+        <a href="../contact/">Contact</a>
+        <a href="https://github.com/kala4678" target="_blank">GitHub</a>
+    </nav>
 
-    <img src="images/myphoto.jpg" alt="Photo of Kala" width="200">
+    <h1>Contact</h1>
 
-    <p>I am currently a second year majoring in Data Science. I love reading and binge watching TV shows in my free time.</p>
+    <form action="mailto:YOUR_EMAIL@gmail.com" method="POST" enctype="text/plain">
+
+        <label>
+            Your Email:
+            <input name="email" type="email">
+        </label>
+
+        <br><br>
+
+        <label>
+            Subject:
+            <input name="subject">
+        </label>
+
+        <br><br>
+
+        <label>
+            Message:
+            <textarea name="body"></textarea>
+        </label>
+
+        <br><br>
+
+        <button>Send</button>
+
+    </form>
 
 </body>
 </html>
