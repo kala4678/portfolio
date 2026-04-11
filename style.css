@@ -6,4 +6,21 @@ body {
   max-width: 60inch;
   margin-inline:auto;
   padding: 1rem;
+  nav {
+  display: flex;
+}
+
+/* Make all links take equal space */
+nav a {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+/* Style current page */
+nav a.current {
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
 }
