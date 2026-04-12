@@ -59,7 +59,6 @@ input,textarea, button {
 }
 /* Add spacing around labels */
 label {
-  display: contents
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
 }
