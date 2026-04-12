@@ -93,4 +93,40 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   text-wrap: balance;
 }
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.resume-header p {
+  margin: 0;
+}
+
+.resume-meta {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.resume-item {
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  margin: 0.15rem 0 0 0;
+}
+
+section > p,
+section ul {
+  margin-top: 0.35rem;
+}
+
+ul {
+  margin: 0.35rem 0 0 1.25rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
 
