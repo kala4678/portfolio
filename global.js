@@ -31,10 +31,9 @@ document.body.insertAdjacentHTML(
 );
 const select = document.querySelector(".color-scheme select");
 
-select.addEventListener("change", (e) => {
-  const value = e.target.value;
-
-  document.documentElement.style.colorScheme = value;
+select.addEventListener('input', function (event) {
+  console.log('color scheme changed to', event.target.value);
+  document.documentElement.style.colorScheme = event.target.value;
 });
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"                  // Local server
