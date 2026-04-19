@@ -30,10 +30,33 @@ document.body.insertAdjacentHTML(
   `
 );
 const select = document.querySelector(".color-scheme select");
+const saved = localStorage.colorScheme;
+
+if (saved) {
+  select.value = saved;
+
+  if (saved === 'light dark') {
+    document.documentElement.style.removeProperty('color-scheme');
+  } else {
+    document.documentElement.style.setProperty('color-scheme', saved);
+  }
+}
 
 select.addEventListener('input', function (event) {
-  console.log('color scheme changed to', event.target.value);
-  document.documentElement.style.colorScheme = event.target.value;
+  const value = event.target.value;
+
+  console.log('color scheme changed to', value);
+
+  // save preference
+  localStorage.colorScheme = value;
+
+  if (value === 'light dark') {
+    // go back to automatic (OS-controlled)
+    document.documentElement.style.removeProperty('color-scheme');
+  } else {
+    // force light or dark
+    document.documentElement.style.setProperty('color-scheme', value);
+  }
 });
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"                  // Local server
