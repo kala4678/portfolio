@@ -136,6 +136,11 @@ li {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+.color-scheme select {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.4rem;
+  height: auto;
 }
 

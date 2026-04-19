@@ -29,6 +29,13 @@ document.body.insertAdjacentHTML(
   </label>
   `
 );
+const select = document.querySelector(".color-scheme select");
+
+select.addEventListener("change", (e) => {
+  const value = e.target.value;
+
+  document.documentElement.style.colorScheme = value;
+});
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
   ? "/"                  // Local server
   : "/website/";         // GitHub Pages repo name
