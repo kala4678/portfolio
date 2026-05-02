@@ -6,13 +6,14 @@ const projects = await fetchJSON('../lib/projects.json');
 const projectsContainer = document.querySelector('.projects');
 const title = document.querySelector('.projects-title');
 title.textContent = `${projects.length} Projects`;
-renderProjects(projects, projectsContainer, 'h2');
 
 let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
 
+let selectedIndex = -1;
+let query = '';
+
 function renderPieChart(projectsGiven) {
-  // Re-calculate data
   let newRolledData = d3.rollups(
     projectsGiven,
     (v) => v.length,
@@ -22,20 +23,50 @@ function renderPieChart(projectsGiven) {
     return { value: count, label: year };
   });
 
-  // Clear previous paths and legend
-  d3.select('svg').selectAll('path').remove();
+  // Clear previous
+  let svg = d3.select('svg');
+  svg.selectAll('path').remove();
   d3.select('.legend').selectAll('li').remove();
 
-  // Draw pie slices
   let newSliceGenerator = d3.pie().value((d) => d.value);
   let newArcData = newSliceGenerator(newData);
   let newArcs = newArcData.map((d) => arcGenerator(d));
 
-  newArcs.forEach((arc, idx) => {
-    d3.select('svg')
+  // Draw wedges
+  newArcs.forEach((arc, i) => {
+    svg
       .append('path')
       .attr('d', arc)
-      .attr('fill', colors(idx));
+      .attr('fill', colors(i))
+      .attr('class', i === selectedIndex ? 'selected' : '')
+      .on('click', () => {
+        selectedIndex = selectedIndex === i ? -1 : i;
+
+        // Update wedge classes
+        svg.selectAll('path').attr('class', (_, idx) =>
+          idx === selectedIndex ? 'selected' : ''
+        );
+
+        // Update legend classes
+        d3.select('.legend').selectAll('li').attr('class', (_, idx) =>
+          idx === selectedIndex
+            ? 'legend-item selected'
+            : 'legend-item'
+        );
+
+        // Filter projects by both year AND search query
+        let yearFiltered =
+          selectedIndex === -1
+            ? projects
+            : projects.filter((p) => p.year === newData[selectedIndex].label);
+
+        let fullyFiltered = yearFiltered.filter((project) => {
+          let values = Object.values(project).join('\n').toLowerCase();
+          return values.includes(query.toLowerCase());
+        });
+
+        renderProjects(fullyFiltered, projectsContainer, 'h2');
+      });
   });
 
   // Draw legend
@@ -44,26 +75,29 @@ function renderPieChart(projectsGiven) {
     legend
       .append('li')
       .attr('style', `--color:${colors(idx)}`)
-      .attr('class', 'legend-item')
+      .attr('class', idx === selectedIndex ? 'legend-item selected' : 'legend-item')
       .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
   });
 }
 
-// Render on page load
+// Initial render
 renderPieChart(projects);
+renderProjects(projects, projectsContainer, 'h2');
 
-// Search
-let query = '';
+// Search bar
 let searchInput = document.querySelector('.searchBar');
 
 searchInput.addEventListener('input', (event) => {
   query = event.target.value;
 
-  let filteredProjects = projects.filter((project) => {
+  // Filter by search query first
+  let searchFiltered = projects.filter((project) => {
     let values = Object.values(project).join('\n').toLowerCase();
     return values.includes(query.toLowerCase());
   });
 
-  renderProjects(filteredProjects, projectsContainer, 'h2');
-  renderPieChart(filteredProjects);
+  // Re-render pie chart based on search results (resets selectedIndex)
+  selectedIndex = -1;
+  renderPieChart(searchFiltered);
+  renderProjects(searchFiltered, projectsContainer, 'h2');
 });
