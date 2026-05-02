@@ -59,8 +59,8 @@ select.addEventListener('input', function (event) {
   }
 });
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-  ? "/"                  // Local server
-  : "/website/";         // GitHub Pages repo name
+  ? "/"
+  : "/portfolio/";
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 for (let p of pages) {
