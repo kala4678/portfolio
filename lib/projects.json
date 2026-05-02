@@ -1,62 +1,74 @@
 [
-    {
-        "title": "Lorem ipsum dolor sit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Lorem."
-    },
-    {
-        "title": "Similique eaque aliquam blanditiis!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Veritatis."
-    },
-    {
-        "title": "Provident accusamus impedit esse!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nemo?"
-    },
-    {
-        "title": "Ipsam id aliquid suscipit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Similique?"
-    },
-    {
-        "title": "Nobis repudiandae libero voluptatibus.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Recusandae."
-    },
-    {
-        "title": "Explicabo nulla deleniti animi.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Iure!"
-    },
-    {
-        "title": "Ducimus nemo ipsa dolor.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Voluptates."
-    },
-    {
-        "title": "Amet fugit delectus harum.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Officia."
-    },
-    {
-        "title": "Aperiam non unde pariatur.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Nihil."
-    },
-    {
-        "title": "Vero sint dicta quasi!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Facilis!"
-    },
-    {
-        "title": "Nihil, eum deleniti. Repellendus!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Recusandae."
-    },
-    {
-        "title": "Perferendis est velit suscipit!",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "Totam!"
-    }
+  {
+    "title": "ArguMate AI Debate Tool",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "AI-powered debate assistant built at a hackathon."
+  },
+  {
+    "title": "Recipe Fitness Analysis",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Analyzed 80K+ recipes using data science techniques."
+  },
+  {
+    "title": "Film Data Project",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Explored trends in film industry data."
+  },
+  {
+    "title": "Portfolio Website",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Personal website built with HTML, CSS, and JS."
+  },
+  {
+    "title": "Data Visualization Lab",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Created interactive visualizations."
+  },
+  {
+    "title": "Java Series Class",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Implemented a generic Series class in Java."
+  },
+  {
+    "title": "Broadway Data Analysis",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Analyzed Broadway revenue trends."
+  },
+  {
+    "title": "ArtPower Event Analysis",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Worked with event datasets at UCSD."
+  },
+  {
+    "title": "ACM Design Project",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Collaborated on a design-focused tech project."
+  },
+  {
+    "title": "Web Scraping Tool",
+    "year": "2025",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Built scraper to find debate teams."
+  },
+  {
+    "title": "Climate Essay Research",
+    "year": "2024",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Analyzed climate policy and capitalism."
+  },
+  {
+    "title": "Placeholder Project",
+    "year": "2023",
+    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+    "description": "Additional placeholder project."
+  }
 ]
