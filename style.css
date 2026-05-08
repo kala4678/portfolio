@@ -232,4 +232,21 @@ path {
     fill: var(--color);
   }
 }
+dl.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+  gap: 0.5rem 1rem;
+}
+dl.stats dt {
+  grid-row: 1;
+  color: gray;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+dl.stats dd {
+  grid-row: 2;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
 
