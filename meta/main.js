@@ -59,9 +59,6 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Total commits');
   dl.append('dd').text(commits.length);
 
-  // Total LOC
-  dl.append('dt').html('Total <abbr title="Lines of code">LOC</abbr>');
-  dl.append('dd').text(data.length);
  
   // Total commits
   dl.append('dt').text('Total commits');
@@ -98,7 +95,7 @@ function renderScatterPlot(data, commits) {
   const height = 600;
   const margin = { top: 10, right: 10, bottom: 30, left: 20 };
 
-}
+
 const usableArea = {
   top: margin.top,
   right: width - margin.right,
@@ -150,7 +147,7 @@ svg
   .append('g')
   .attr('transform', `translate(${usableArea.left}, 0)`)
   .call(yAxis);
-
+}
 
 let data = await loadData();
 let commits = processCommits(data);
