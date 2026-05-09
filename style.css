@@ -249,4 +249,9 @@ dl.stats dd {
   font-size: 2rem;
   font-weight: bold;
 }
+#chart svg {
+  width: 100%;
+  height: auto;
+
+}
 
