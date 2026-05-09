@@ -258,6 +258,8 @@ dl.info {
   display: grid;
   grid-template-columns: max-content auto;
   gap: 0.25em 1em;
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 dl.info dt {
@@ -269,16 +271,20 @@ dl.info dd {
   margin: 0;
   font-weight: bold;
 }
-
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
 .tooltip {
   position: fixed;
   top: 1em;
   left: 1em;
-  background: white;
-  padding: 1em;
-  border: 1px solid #ccc;
+  background-color: rgb(255 255 255 / 0.9);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
   border-radius: 0.5em;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+  padding: 1em;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgb(0 0 0 / 0.1);
 }
 
 circle {
