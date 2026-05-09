@@ -69,6 +69,29 @@ function renderCommitInfo(data, commits) {
   dl.append('dt').text('Max depth');
   dl.append('dd').text(d3.max(data, (d) => d.depth));
 }
+function renderTooltipContent(commit) {
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+  const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
+  const lines = document.getElementById('commit-lines');
+
+  if (Object.keys(commit).length === 0) return;
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+
+  date.textContent = commit.datetime?.toLocaleString('en', {
+    dateStyle: 'full',
+  });
+
+  time.textContent = commit.datetime?.toLocaleString('en', {
+    timeStyle: 'short',
+  });
+
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
+}
 
 function renderScatterPlot(data, commits) {
   const width = 1000;
@@ -121,7 +144,14 @@ function renderScatterPlot(data, commits) {
     .attr('cx', (d) => xScale(d.datetime))
     .attr('cy', (d) => yScale(d.hourFrac))
     .attr('r', 5)
-    .attr('fill', 'steelblue');
+    .attr('fill', 'steelblue')
+    .on('mouseenter', (event, commit) => {
+        renderTooltipContent(commit);
+    })
+    .on('mouseleave', () => {
+        // TODO: Hide the tooltip
+    });
+
 
   // Axes
   const xAxis = d3.axisBottom(xScale);
