@@ -1,4 +1,9 @@
 [
+  {"title": "Bikewatching",
+  "year": "2026",
+  "image": "../images/bikewatching_proj.jpeg",
+  "description": "An interactive Mapbox and D3 visualization of Boston-area bike traffic, showing bike lanes, Bluebike stations, traffic volume, traffic flow, tooltips, and time-based filtering.",
+  "url": "https://kala4678.github.io/bikewatching/"},
   {
     "title": "ArguMate AI Debate Tool",
     "year": "2025",
