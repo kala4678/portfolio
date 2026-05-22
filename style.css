@@ -288,14 +288,12 @@ dl.info[hidden]:not(:hover, :focus-within) {
 }
 
 circle {
-  transition: 200ms;
+  
   transform-origin: center;
   transform-box: fill-box;
+
 }
 
-circle:hover {
-  transform: scale(1.5);
-}
 
 circle.selected {
   fill: #ff6b6b;

@@ -152,7 +152,7 @@ function renderScatterPlot(data, commits) {
 
   dots
   .selectAll('circle')
-  .data(sortedCommits)
+  .data(sortedCommits, (d) => d.id)
   .join('circle')
   .attr('cx', (d) => xScale(d.datetime))
   .attr('cy', (d) => yScale(d.hourFrac))
@@ -177,13 +177,15 @@ function renderScatterPlot(data, commits) {
     .tickFormat((d) => String(d % 24).padStart(2, '0') + ':00');
 
   svg
-    .append('g')
-    .attr('transform', `translate(0, ${usableArea.bottom})`)
-    .call(xAxis);
+  .append('g')
+  .attr('transform', `translate(0, ${usableArea.bottom})`)
+  .attr('class', 'x-axis')
+  .call(xAxis);
 
   svg
     .append('g')
     .attr('transform', `translate(${usableArea.left}, 0)`)
+    .attr('class', 'y-axis')
     .call(yAxis);
   createBrushSelector(svg);
 }
@@ -275,3 +277,92 @@ let data = await loadData();
 let commits = processCommits(data);
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
+
+let commitProgress = 100;
+let timeScale = d3
+  .scaleTime()
+  .domain([
+    d3.min(commits, (d) => d.datetime),
+    d3.max(commits, (d) => d.datetime),
+  ])
+  .range([0, 100]);
+let commitMaxTime = timeScale.invert(commitProgress);
+
+const timeSlider = document.getElementById('commit-progress');
+const timeDisplay = document.getElementById('commit-time');
+let filteredCommits = commits;
+function updateScatterPlot(data, commits) {
+  const svg = d3.select('#chart').select('svg');
+
+  xScale = xScale.domain(d3.extent(commits, (d) => d.datetime));
+
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3.scaleSqrt()
+    .domain([minLines, maxLines])
+    .range([2, 30]);
+
+  const xAxis = d3.axisBottom(xScale);
+
+  const xAxisGroup = svg.select('g.x-axis');
+  xAxisGroup.transition().duration(300).call(xAxis);
+
+  const dots = svg.select('g.dots');
+  const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
+
+ dots
+    .selectAll('circle')
+    .data(sortedCommits, (d) => d.id)
+    .join(
+      (enter) =>
+        enter
+          .append('circle')
+          .attr('cx', (d) => xScale(d.datetime))
+          .attr('cy', (d) => yScale(d.hourFrac))
+          .attr('r', 0)
+          .attr('fill', 'steelblue')
+          .style('fill-opacity', 0.7)
+          .call((enter) =>
+            enter
+              .transition()
+              .duration(300)
+              .attr('r', (d) => rScale(d.totalLines))
+              .attr('cx', (d) => xScale(d.datetime))
+          ),
+      (update) =>
+        update
+          .call((update) =>
+            update
+              .transition()
+              .duration(300)
+              .attr('cx', (d) => xScale(d.datetime))
+              .attr('cy', (d) => yScale(d.hourFrac))
+              .attr('r', (d) => rScale(d.totalLines))
+          ),
+      (exit) =>
+        exit.call((exit) =>
+          exit.transition().duration(300).attr('r', 0).remove()
+        )
+    );
+
+  svg.selectAll('.dots, .overlay ~ *').raise();
+}
+function onTimeSliderChange() {
+  commitProgress = +timeSlider.value;
+
+  commitMaxTime = timeScale.invert(commitProgress);
+
+  timeDisplay.textContent = commitMaxTime.toLocaleString('en', {
+    dateStyle: 'long',
+    timeStyle: 'short',
+  });
+  filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
+  
+
+  updateScatterPlot(data, filteredCommits);
+}
+
+timeSlider.addEventListener('input', onTimeSliderChange);
+
+onTimeSliderChange();
+
+
