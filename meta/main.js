@@ -291,6 +291,43 @@ let commitMaxTime = timeScale.invert(commitProgress);
 const timeSlider = document.getElementById('commit-progress');
 const timeDisplay = document.getElementById('commit-time');
 let filteredCommits = commits;
+function updateFileDisplay(filteredCommits) {
+  let lines = filteredCommits.flatMap((d) => d.lines);
+  let files = d3
+  .groups(lines, (d) => d.file)
+  .map(([name, lines]) => {
+    return { name, lines };
+  })
+  let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+  let filesContainer = d3
+    .select('#files')
+    .selectAll('div')
+    .data(files, (d) => d.name)
+    .join(
+      // This code only runs when the div is initially rendered
+      (enter) =>
+        enter.append('div').call((div) => {
+          div.append('dt').append('code');
+          div.append('dd');
+        }),
+    );
+
+   // This code updates the div info
+  filesContainer.select('dt > code').html(
+    (d) => `${d.name}<small>${d.lines.length} lines</small>`
+  );
+ 
+  // Append one div per line
+  filesContainer
+    .select('dd')
+    .selectAll('div')
+    .data((d) => d.lines)
+    .join('div')
+    .attr('class', 'loc')
+    .attr('style', (d) => `--color: ${colors(d.type)}`);
+
+}
 function updateScatterPlot(data, commits) {
   const svg = d3.select('#chart').select('svg');
 
@@ -359,10 +396,12 @@ function onTimeSliderChange() {
   
 
   updateScatterPlot(data, filteredCommits);
+  updateFileDisplay(filteredCommits);
 }
 
 timeSlider.addEventListener('input', onTimeSliderChange);
 
 onTimeSliderChange();
+
 
 
